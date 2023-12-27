@@ -89,11 +89,21 @@ class _telaPrincipalState extends State<telaPrincipal> {
                   ),
                 ),
                 ElevatedButton(
-                  onPressed: () {},
+                  onPressed: _calcular, // Chame o método calcular aqui
                   style: ElevatedButton.styleFrom(
-                      primary: Color.fromARGB(255, 0, 11, 112),
-                      minimumSize: Size(double.infinity, 48)),
-                  child: Text("Calcular"),
+                    primary: Color.fromARGB(255, 0, 11, 112),
+                    minimumSize: Size(double.infinity, 48),
+                  ),
+                  child: Row(
+                    mainAxisSize: MainAxisSize.min,
+                    children: [
+                      Icon(Icons.calculate), // Adicione um ícone ao botão
+                      SizedBox(
+                          width:
+                              8), // Adicione um espaço entre o ícone e o texto
+                      Text("Calcular"),
+                    ],
+                  ),
                 ),
                 Padding(
                   padding: EdgeInsets.only(top: 20),
