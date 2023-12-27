@@ -11,6 +11,41 @@ class _telaPrincipalState extends State<telaPrincipal> {
   TextEditingController _controllerAlcool = TextEditingController();
   TextEditingController _controllerGasolina = TextEditingController();
 
+  String _textoResultado = "";
+
+  void _calcular() {
+    double? precoAlcool = double.tryParse(_controllerAlcool.text);
+    double? precoGasolina = double.tryParse(_controllerGasolina.text);
+
+    if (precoAlcool == null ||
+        precoGasolina == null ||
+        precoAlcool <= 0 ||
+        precoGasolina <= 0) {
+      setState(() {
+        _textoResultado = "Os preços devem ser maiores que 0 e utilizar (.)";
+      });
+    } else if (_controllerAlcool.text.isEmpty ||
+        _controllerGasolina.text.isEmpty) {
+      setState(() {
+        _textoResultado = "Preencha ambos os campos";
+      });
+    } else {
+      setState(() {
+        _textoResultado = "";
+      });
+
+      if ((precoAlcool / precoGasolina) >= 0.7) {
+        setState(() {
+          _textoResultado = "Melhor abastecer com gasolina";
+        });
+      } else {
+        setState(() {
+          _textoResultado = "Melhor abastecer com álcool";
+        });
+      }
+    }
+  }
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -63,11 +98,11 @@ class _telaPrincipalState extends State<telaPrincipal> {
                 Padding(
                   padding: EdgeInsets.only(top: 20),
                   child: Text(
-                    "Resultado",
+                    _textoResultado,
                     style: TextStyle(
-                      fontSize: 22,
-                      fontWeight: FontWeight.bold,
-                    ),
+                        fontSize: 22,
+                        fontWeight: FontWeight.bold,
+                        color: Colors.black),
                   ),
                 )
               ],
